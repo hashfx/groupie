@@ -57,8 +57,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: _isSignedIn
-          ? HomePage()
-          : LoginPage(), // if signedin display homepage else render login page
+          ? const HomePage()
+          : const LoginPage(), // if signedin display homepage else render login page
     );
   }
 }
