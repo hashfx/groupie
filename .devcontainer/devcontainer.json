@@ -2,5 +2,12 @@
     "image": "cirrusci/flutter:beta",
     "forwardPorts": [
         3000
-    ]
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Dart-Code.flutter"
+			]
+		}
+	}
 }
