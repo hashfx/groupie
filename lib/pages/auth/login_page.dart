@@ -39,7 +39,9 @@ class _LoginPageState extends State<LoginPage> {
                   "Login to Groupie chat 🤫",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
                 ),
+                SizedBox(height: 10),
                 Image.asset("assets/login.png"),
+                SizedBox(height: 10),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(
                       labelText: "Email",
