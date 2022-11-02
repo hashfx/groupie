@@ -1,3 +1,10 @@
 lib/shared/
 Show registration page to not-signed-in users and home screen to signed-in users
 Login Authentication: when login is successful, a particular key would be stored in device storage; if key exists, redirect user to homepage else to login page
+
+
+Firestore Structure
+
+User database Structure {email, fullname, group[list({"groupID_groupName"})], pfp}
+Group database Structure {admin, groupIcon, groupName, memberList[list({""})], recentMsg, recentMsgSender, recentMsgTime}
+Message Structure {message, sender, time}
