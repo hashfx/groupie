@@ -119,4 +119,21 @@ class _SearchPageState extends State<SearchPage> {
       });
     }
   }
+
+  groupList() {
+    return hasUserSearched
+        ? ListView.builder(
+            shrinkWrap: true,
+            itemCount: searchSnapshot!.docs.length,
+            itemBuilder: (context, index) {
+              return groupTile(
+                userName,
+                searchSnapshot!.docs[index]['groupId'],
+                searchSnapshot!.docs[index]['groupName'],
+                searchSnapshot!.docs[index]['admin'],
+              );
+            },
+          )
+        : Container();
+  }
 }
