@@ -34,6 +34,14 @@ class _SearchPageState extends State<SearchPage> {
     user = FirebaseAuth.instance.currentUser;
   }
 
+  String getName(String r) {
+    return r.substring(r.indexOf("_") + 1);
+  }
+
+  String getId(String res) {
+    return res.substring(0, res.indexOf("_"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
