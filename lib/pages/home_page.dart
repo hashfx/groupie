@@ -6,6 +6,7 @@ import 'package:groupie/pages/auth/profile_page.dart';
 import 'package:groupie/pages/search_page.dart';
 import 'package:groupie/service/auth_service.dart';
 import 'package:groupie/service/database_service.dart';
+import 'package:groupie/widgets/group_tile.dart';
 import 'package:groupie/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       });
     });
 
-  // get snapshots in program stream
+    // get snapshots in program stream
     await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
         .getUserGroups()
         .then((snapshot) {
