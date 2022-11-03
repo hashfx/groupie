@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:groupie/helper/helper_function.dart';
 import 'package:groupie/pages/auth/login_page.dart';
-import 'package:groupie/pages/auth/profile_page.dart';
+import 'package:groupie/pages/profile_page.dart';
 import 'package:groupie/pages/search_page.dart';
 import 'package:groupie/service/auth_service.dart';
 import 'package:groupie/service/database_service.dart';
