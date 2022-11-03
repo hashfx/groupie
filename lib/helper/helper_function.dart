@@ -30,4 +30,14 @@ class HelperFunctions {
     SharedPreferences sf = await SharedPreferences.getInstance();
     return sf.getBool(userLoggedInKey); // if particular key exists, return true
   }
+
+  static Future<String?> getUserEmailFromSF() async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return sf.getString(userEmailKey); // if particular key exists, return true
+  }
+
+  static Future<String?> getUserNameFromSF() async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return sf.getString(userNameKey); // if particular key exists, return true
+  }
 }
