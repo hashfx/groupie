@@ -17,6 +17,12 @@ class GroupInfo extends StatefulWidget {
 
 class _GroupInfoState extends State<GroupInfo> {
   @override
+  void initState() {
+    getMembers();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container();
   }
