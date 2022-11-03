@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:groupie/helper/helper_function.dart';
+import 'package:groupie/service/database_service.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -100,5 +101,22 @@ class _SearchPageState extends State<SearchPage> {
         ],
       ),
     );
+  }
+
+  initiateSearchMethod() async {
+    if (searchController.text.isNotEmpty) {
+      setState(() {
+        isLoading = true;
+      });
+      await DatabaseService()
+          .searchByName(searchController.text)
+          .then((snapshot) {
+        setState(() {
+          searchSnapshot = snapshot;
+          isLoading = false;
+          hasUserSearched = true;
+        });
+      });
+    }
   }
 }
