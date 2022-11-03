@@ -50,6 +50,15 @@ class _HomePageState extends State<HomePage> {
         userName = val!;
       });
     });
+
+  // get snapshots in program stream
+    await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
+        .getUserGroups()
+        .then((snapshot) {
+      setState(() {
+        groups = snapshot;
+      });
+    });
   }
 
   AuthService authService = AuthService(); // init auth service
