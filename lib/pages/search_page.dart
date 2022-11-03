@@ -19,6 +19,12 @@ class _SearchPageState extends State<SearchPage> {
   User? user;
 
   @override
+  void initState() {
+    super.initState();
+    getCurrentUserIdandName();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(child: Text("SearchPage")),
