@@ -136,4 +136,15 @@ class _SearchPageState extends State<SearchPage> {
           )
         : Container();
   }
+
+  joinedOrNot(
+      String userName, String groupId, String groupname, String admin) async {
+    await DatabaseService(uid: user!.uid)
+        .isUserJoined(groupname, groupId, userName)
+        .then((value) {
+      setState(() {
+        isJoined = value;
+      });
+    });
+  }
 }
