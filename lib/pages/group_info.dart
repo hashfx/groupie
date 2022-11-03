@@ -53,7 +53,6 @@ class _GroupInfoState extends State<GroupInfo> {
         elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text("Group Info"),
-      ),
       actions: [
         IconButton(
             onPressed: () {
@@ -95,6 +94,7 @@ class _GroupInfoState extends State<GroupInfo> {
             },
             icon: const Icon(Icons.exit_to_app))
       ],
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
