@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:groupie/helper/helper_function.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -22,6 +23,15 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     getCurrentUserIdandName();
+  }
+
+  getCurrentUserIdandName() async {
+    await HelperFunctions.getUserNameFromSF().then((value) {
+      setState(() {
+        userName = value!;
+      });
+    });
+    user = FirebaseAuth.instance.currentUser;
   }
 
   @override
