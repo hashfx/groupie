@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getUserData();
   }
@@ -296,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                   return GroupTile(
                       groupId: getId(snapshot.data['groups'][reverseIndex]),
                       groupName: getName(snapshot.data['groups'][reverseIndex]),
-                      userName: snapshot.data['fullName']);
+                      userName: snapshot.data['fullname']);
                 },
               );
             } else {
@@ -336,7 +335,7 @@ class _HomePageState extends State<HomePage> {
             height: 20,
           ),
           const Text(
-            "You've not joined any groups, tap on the add icon to create a group or also search from top search button.",
+            "You've not joined any groups, tap on the add icon to create a group or search from top search button.",
             textAlign: TextAlign.center,
           )
         ],
