@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:groupie/pages/group_info.dart';
 import 'package:groupie/service/database_service.dart';
 import 'package:groupie/widgets/widgets.dart';
 
@@ -115,7 +116,7 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-   chatMessages() {
+  chatMessages() {
     return StreamBuilder(
       stream: chats,
       builder: (context, AsyncSnapshot snapshot) {
@@ -135,7 +136,7 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-   sendMessage() {
+  sendMessage() {
     if (messageController.text.isNotEmpty) {
       Map<String, dynamic> chatMessageMap = {
         "message": messageController.text,
