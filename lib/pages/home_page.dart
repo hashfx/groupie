@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:groupie/helper/helper_function.dart';
 import 'package:groupie/pages/auth/login_page.dart';
 import 'package:groupie/pages/profile_page.dart';
@@ -8,18 +6,20 @@ import 'package:groupie/service/auth_service.dart';
 import 'package:groupie/service/database_service.dart';
 import 'package:groupie/widgets/group_tile.dart';
 import 'package:groupie/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  // get values from Shared Preferences
   String userName = "";
   String email = "";
+  AuthService authService = AuthService();
   Stream? groups;
   bool _isLoading = false;
   String groupName = "";
@@ -30,11 +30,12 @@ class _HomePageState extends State<HomePage> {
     getUserData();
   }
 
-// string manipulation
+  // get ID from group name
   String getId(String res) {
     return res.substring(0, res.indexOf("_"));
   }
 
+  // get group name from group string
   String getName(String res) {
     return res.substring(res.indexOf("_") + 1);
   }
@@ -50,8 +51,7 @@ class _HomePageState extends State<HomePage> {
         userName = val!;
       });
     });
-
-    // get snapshots in program stream
+    // getting the list of snapshots in our stream
     await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
         .getUserGroups()
         .then((snapshot) {
@@ -61,7 +61,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  AuthService authService = AuthService(); // init auth service
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text(
           "Groups",
           style: TextStyle(
-              color: Colors.white, fontSize: 27, fontWeight: FontWeight.bold),
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 27),
         ),
       ),
       drawer: Drawer(
@@ -130,7 +129,7 @@ class _HomePageState extends State<HomePage> {
             },
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            leading: const Icon(Icons.person),
+            leading: const Icon(Icons.group),
             title: const Text(
               "Profile",
               style: TextStyle(color: Colors.black),
@@ -171,9 +170,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     );
                   });
-              authService.signOut().whenComplete(() {
-                nextScreenReplace(context, const LoginPage());
-              });
             },
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -182,7 +178,7 @@ class _HomePageState extends State<HomePage> {
               "Logout",
               style: TextStyle(color: Colors.black),
             ),
-          ),
+          )
         ],
       )),
       body: groupList(),
@@ -213,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.left,
               ),
               content: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min, // show minimum sized dialog box
                 children: [
                   _isLoading == true
                       ? Center(
@@ -255,6 +251,7 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   onPressed: () async {
                     if (groupName != "") {
+                      // don't create empty group with no name
                       setState(() {
                         _isLoading = true;
                       });
@@ -287,7 +284,9 @@ class _HomePageState extends State<HomePage> {
         // make some checks
         if (snapshot.hasData) {
           if (snapshot.data['groups'] != null) {
+            // if joined group(s)
             if (snapshot.data['groups'].length != 0) {
+              // is there any group present inside gorup array
               return ListView.builder(
                 itemCount: snapshot.data['groups'].length,
                 itemBuilder: (context, index) {
@@ -305,6 +304,7 @@ class _HomePageState extends State<HomePage> {
             return noGroupWidget();
           }
         } else {
+          // if data is not present or fetched
           return Center(
             child: CircularProgressIndicator(
                 color: Theme.of(context).primaryColor),
@@ -335,7 +335,7 @@ class _HomePageState extends State<HomePage> {
             height: 20,
           ),
           const Text(
-            "You've not joined any groups, tap on the add icon to create a group or search from top search button.",
+            "You've not joined any groups, tap on the add icon to create a group or also search from top search button.",
             textAlign: TextAlign.center,
           )
         ],
